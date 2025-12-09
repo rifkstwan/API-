@@ -200,35 +200,51 @@ curl -X POST http://localhost:8000/api/custom-report
 ## 📂 Struktur Project
 
 economic-data-api/
-├── app/
-│ ├── Http/
-│ │ ├── Controllers/
-│ │ │ ├── EconomicIndicatorController.php
-│ │ │ ├── InterestRateController.php
-│ │ │ ├── MarketIndicatorController.php
-│ │ │ └── CustomReportController.php
-│ │ └── Middleware/
-│ │ └── CheckClientToken.php
+│
+├── app/Http/
+│ ├── Controllers/
+│ │ ├── EconomicIndicatorController.php
+│ │ ├── InterestRateController.php
+│ │ ├── MarketIndicatorController.php
+│ │ └── CustomReportController.php
+│ │
+│ └── Middleware/
+│ └── CheckClientToken.php
+│
 ├── config/
 │ ├── auth.php
 │ ├── services.php
 │ └── l5-swagger.php
+│
 ├── routes/
 │ └── api.php
-├── storage/
-│ └── api-docs/
+│
+├── storage/api-docs/
 │ └── api-docs.json
+│
 ├── README.md
 └── DOCUMENTATION.md
 
+### Penjelasan Struktur
+
+| Path                                       | Deskripsi                                     |
+| ------------------------------------------ | --------------------------------------------- |
+| `app/Http/Controllers/`                    | Berisi 4 controller utama untuk API endpoints |
+| `app/Http/Middleware/CheckClientToken.php` | Custom middleware untuk validasi OAuth2 token |
+| `config/auth.php`                          | Konfigurasi autentikasi Passport              |
+| `config/services.php`                      | Konfigurasi FRED API key                      |
+| `config/l5-swagger.php`                    | Konfigurasi dokumentasi Swagger               |
+| `routes/api.php`                           | Definisi semua API routes                     |
+| `storage/api-docs/api-docs.json`           | File Swagger documentation yang ter-generate  |
+
 ## 👥 Tim Pengembang
 
-| No  | Nama                | Role      |
-| --- | ------------------- | --------- |
-| 1   | Arya Yudha B athara | Developer |
-| 2   | Nama Anggota 2      | Developer |
-| 3   | Nama Anggota 3      | Developer |
-| 4   | Nama Anggota 4      | Developer |
+| No  | Nama               | Role      |
+| --- | ------------------ | --------- |
+| 1   | Arya Yudha Bathara | Developer |
+| 2   | Nama Anggota 2     | Developer |
+| 3   | Nama Anggota 3     | Developer |
+| 4   | Nama Anggota 4     | Developer |
 
 ## 📝 Lisensi
 
