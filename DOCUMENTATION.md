@@ -22,7 +22,14 @@ sequenceDiagram
     DB-->>API: Token Valid
     API-->>Client: Return Data
 ```
-
+Diagram ini menggambarkan alur autentikasi antara aplikasi client, API server berbasis Laravel, dan Database.  
+**Penjelasan langkah:**
+- Client mengirim permintaan POST ke `/oauth/token` beserta kredensial login.
+- API meneruskan permintaan ke Database untuk validasi kredensial.
+- Jika valid, Database membalas konfirmasi ke API.
+- API mengembalikan token autentikasi ke client.
+- Setelah autentikasi, setiap permintaan ke endpoint API harus menyertakan token tersebut.
+- API akan memvalidasi token ke Database sebelum memberikan respon ke client.
 ---
 
 ## 2. API Request Flow
@@ -41,6 +48,12 @@ flowchart TD
     Return1 --> End
     Return2 --> End
 ```
+Diagram ini menjelaskan proses permintaan data dari client ke API:
+- Permintaan client masuk dan dicek validitas tokennya.
+- Jika token tidak valid, API mengembalikan 401 Unauthorized.
+- Jika token valid, dicek apakah data yang diminta sudah tersimpan di cache.
+  - Jika ada, data dari cache langsung dikirim ke client.
+  - Jika tidak, API akan meminta data ke FRED API eksternal, memproses dan menyimpan ke cache, kemudian mengirimkan hasil ke client.
 
 ---
 
@@ -63,7 +76,16 @@ flowchart TD
     E422 --> End
     Success --> End
 ```
-
+Diagram ini menjabarkan proses pembuatan custom report:
+- Client mengirim request POST ke `/api/custom-report` dengan indikator yang diinginkan.
+- Token diverifikasi terlebih dahulu.
+  - Jika tidak valid, dikembalikan error 401.
+- Data input divalidasi.
+  - Jika tidak valid, dikembalikan error 422.
+- Untuk setiap indikator:
+  - API akan mengambil data dari FRED API.
+  - Data diformat dan ditambahkan ke report.
+- Jika semua indikator selesai diproses, respon 200 OK beserta report dikembalikan ke client.
 ---
 
 ## 4. System Architecture
@@ -98,7 +120,11 @@ graph TB
     Controllers --> MySQL
     Controllers --> FRED
 ```
-
+Diagram ini menunjukkan arsitektur sistem secara umum:
+- Berbagai jenis client (Mobile App, Web App, Backend Service) terkoneksi ke API server.
+- API server dilapisi OAuth2 Middleware untuk autentikasi, dengan controller sebagai inti proses logika bisnis.
+- Data dapat berasal/mengalir ke cache, MySQL database, serta sumber eksternal (FRED API).
+- Dengan desain ini, sistem mendukung keamanan (autentikasi dan middleware), kecepatan (cache), serta fleksibilitas dalam mengambil data baik lokal (MySQL) maupun eksternal (FRED API).
 ---
 
 ## 5. API Endpoints
