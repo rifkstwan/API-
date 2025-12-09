@@ -199,6 +199,34 @@ curl -X POST http://localhost:8000/api/custom-report
 
 ## 📂 Struktur Project
 
+## 📂 Struktur Project
+
+```
+economic-data-api/
+│
+├── app/Http/
+│   ├── Controllers/
+│   │   ├── EconomicIndicatorController.php
+│   │   ├── InterestRateController.php
+│   │   ├── MarketIndicatorController.php
+│   │   └── CustomReportController.php
+│   └── Middleware/
+│       └── CheckClientToken.php
+│
+├── config/
+│   ├── auth.php
+│   ├── services.php
+│   └── l5-swagger.php
+│
+├── routes/
+│   └── api.php
+│
+├── storage/api-docs/
+│   └── api-docs.json
+│
+├── README.md
+└── DOCUMENTATION.md
+```
 ### File dan Folder Penting
 
 | Lokasi                  | File/Folder                       | Deskripsi                                                      |
